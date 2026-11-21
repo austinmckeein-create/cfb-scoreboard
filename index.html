@@ -168,6 +168,51 @@ main { max-width: 1240px; margin: 0 auto; padding: 18px max(16px, env(safe-area-
   .card.live.ot { box-shadow: inset 4px 0 0 var(--ot), 0 0 0 3px var(--ot-glow); }
 }
 
+/* ---------- Team panel ---------- */
+[data-team] { cursor: pointer; }
+[data-team]:hover { text-decoration: underline; text-decoration-color: var(--turf); text-underline-offset: 3px; }
+.feat [data-team]:hover { text-decoration-color: currentColor; }
+.sheet { border: 0; padding: 0; border-radius: 12px; width: min(600px, calc(100% - 32px)); max-height: min(86vh, 900px);
+  background: var(--surface); color: var(--fg); box-shadow: 0 20px 60px rgba(0,0,0,.35); overflow: hidden; }
+.sheet[open] { display: flex; flex-direction: column; }
+.sheet::backdrop { background: rgba(10, 16, 12, .55); }
+.tp-head { display: grid; grid-template-columns: auto 44px 1fr auto auto; align-items: center; gap: 10px;
+  padding: 14px 12px 12px 16px; border-bottom: 2px solid var(--turf); }
+.tp-head img { width: 44px; height: 44px; object-fit: contain; }
+.tp-back[hidden] + img { grid-column: 1 / 3; }
+.tp-id { min-width: 0; }
+.tp-id h2 { margin: 0; font: 800 26px/1.05 var(--display); text-transform: uppercase; letter-spacing: .02em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tp-sub { font: 500 14px var(--cond); color: var(--muted); letter-spacing: .03em; margin-top: 2px; }
+.tp-sub b { color: var(--fg); font-weight: 600; }
+.tp-x, .tp-back { background: none; border: 0; font-size: 26px; line-height: 1; padding: 4px 8px; min-height: 40px; min-width: 40px; color: var(--muted); }
+.tp-x:hover, .tp-back:hover { color: var(--fg); }
+.tp-pin { font: 600 13px var(--cond); text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; color: var(--muted); }
+.tp-pin[aria-pressed=true] { color: var(--turf); border-color: var(--turf); }
+.tp-body { overflow-y: auto; padding: 4px 0 calc(16px + env(safe-area-inset-bottom, 0px)); -webkit-overflow-scrolling: touch; }
+.tp-body h3 { margin: 0; padding: 14px 16px 6px; font: 800 15px var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--turf); display: flex; justify-content: space-between; }
+.tp-body h3 span { color: var(--muted); font: 600 13px var(--cond); letter-spacing: .04em; }
+.gm { display: grid; grid-template-columns: 58px 26px 22px 1fr auto; align-items: center; gap: 8px; padding: 8px 16px; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.gm .when { font: 600 13px/1.15 var(--cond); color: var(--muted); text-transform: uppercase; letter-spacing: .03em; }
+.gm .when small { display: block; font-weight: 500; }
+.gm .ha { font: 600 13px var(--cond); color: var(--muted); text-align: center; }
+.gm img { width: 22px; height: 22px; object-fit: contain; }
+.gm .opp { min-width: 0; }
+.gm .opp > span { font-weight: 600; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gm .opp small { display: block; color: var(--muted); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gm .opp .rank { margin-right: 4px; }
+.gm .res { font: 800 18px var(--display); text-align: right; white-space: nowrap; }
+.gm .res i { font-style: normal; display: inline-block; min-width: 1.4em; text-align: center; margin-right: 6px; border-radius: 3px; color: #fff; font-size: 14px; padding: 1px 0; }
+.gm .res.w i { background: var(--turf); }
+.gm .res.l i { background: var(--live); }
+.gm .res.l { color: var(--muted); }
+.gm .res.up { font: 600 13px var(--cond); color: var(--muted); text-transform: uppercase; letter-spacing: .03em; }
+.gm.live { background: color-mix(in srgb, var(--live) 7%, var(--surface)); }
+.gm.live .res { color: var(--live); }
+.gm .conf-tag { color: var(--turf); font-weight: 600; }
+.tp-msg { color: var(--muted); padding: 28px 16px; text-align: center; }
+@media (prefers-reduced-motion: no-preference) { .sheet[open] { animation: sheetin .18s ease-out; } }
+@keyframes sheetin { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+
 /* ---------- Phone ---------- */
 .star { min-width: 36px; min-height: 32px; display: inline-flex; align-items: center; justify-content: flex-end; }
 @media (max-width: 640px) {
@@ -200,6 +245,12 @@ main { max-width: 1240px; margin: 0 auto; padding: 18px max(16px, env(safe-area-
   .conf td.pos { padding-left: 10px; }
   .conf .pts { display: none; }
   .conf td.tm img { width: 18px; height: 18px; }
+  .sheet { width: 100%; max-width: 100%; max-height: 92dvh; margin: auto 0 0; border-radius: 14px 14px 0 0; }
+  .tp-head { grid-template-columns: auto 38px 1fr auto auto; gap: 8px; padding-left: max(12px, env(safe-area-inset-left, 0px)); }
+  .tp-head img { width: 38px; height: 38px; }
+  .tp-id h2 { font-size: 22px; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .tp-pin { padding: 6px 8px; min-height: 36px; font-size: 13px; }
+  .gm { grid-template-columns: 50px 22px 20px 1fr auto; gap: 6px; padding: 9px 12px; }
 }
 </style>
 </head>
@@ -255,6 +306,19 @@ main { max-width: 1240px; margin: 0 auto; padding: 18px max(16px, env(safe-area-
     <div class="msg" id="st-msg" hidden></div>
   </div>
 </main>
+<dialog class="sheet" id="sheet" aria-labelledby="tp-name">
+  <div class="tp-head">
+    <button class="tp-back" id="tp-back" aria-label="Back" hidden>‹</button>
+    <img id="tp-logo" alt="">
+    <div class="tp-id">
+      <h2 id="tp-name">Team</h2>
+      <div class="tp-sub" id="tp-sub"></div>
+    </div>
+    <button class="tp-pin" id="tp-pin" aria-pressed="false">★ Pin</button>
+    <button class="tp-x" id="tp-x" aria-label="Close">×</button>
+  </div>
+  <div class="tp-body" id="tp-body"></div>
+</dialog>
 
 <script>
 const API = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard";
@@ -361,6 +425,7 @@ function buildWeeks(data) {
   if (weeksBuilt) return;
   const lg = (data.leagues || [])[0] || {};
   const year = (data.season && data.season.year) || (lg.season && lg.season.year) || new Date().getFullYear();
+  state.seasonYear = year;
   const curType = String((data.season && data.season.type) || 2);
   const curWeek = String((data.week && data.week.number) || "");
   let groups = Array.isArray(lg.calendar) ? lg.calendar.filter(c => c && Array.isArray(c.entries)) : [];
@@ -529,6 +594,7 @@ function featCard(id, f) {
     const row = el("div", "row" + (t.winner ? "" : " lost"));
     const img = el("img"); img.alt = ""; if (t.logo) img.src = t.logo; else img.style.visibility = "hidden";
     const nm = el("div", "tn");
+    tlink(nm, t);
     if (t.rank) nm.append(el("span", "rank", "#" + t.rank + " "));
     nm.append(document.createTextNode(t.name));
     nm.title = t.full;
@@ -548,6 +614,191 @@ function featCard(id, f) {
 // Keep the countdown and expiry moving between data refreshes.
 setInterval(() => { if (state.featured.size) { state.fresh.clear(); renderSpot(); } }, 30000);
 
+// ---------- Team schedule panel ----------
+const TEAM_API = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/";
+state.sched = new Map();     // team id -> { at, team, games }
+state.tpStack = [];          // team ids opened, so an opponent can be opened and then backed out of
+function tlink(node, t) {
+  if (!t || !t.id) return;
+  node.dataset.team = t.id;
+  node.dataset.teamName = t.full || t.name || "";
+  node.dataset.teamLogo = t.logo || "";
+  node.tabIndex = 0;
+  node.setAttribute("role", "button");
+  node.setAttribute("aria-label", "Show " + (t.full || t.name) + " schedule");
+}
+const scoreText = s => s == null ? "" : typeof s === "object" ? String(s.displayValue ?? s.value ?? "") : String(s);
+function parseSched(ev, id) {
+  const comp = (ev.competitions || [])[0] || {};
+  const st = (comp.status || ev.status || {}).type || {};
+  const cs = comp.competitors || [];
+  const me = cs.find(c => String(c.team && c.team.id) === String(id)) || cs[0] || {};
+  const op = cs.find(c => c !== me) || {};
+  const ot = op.team || {};
+  const ms = scoreText(me.score), os = scoreText(op.score);
+  let res = "";
+  if (st.state === "post") res = me.winner ? "W" : op.winner ? "L" : (Number(ms) > Number(os) ? "W" : Number(ms) < Number(os) ? "L" : "T");
+  const r = op.curatedRank && op.curatedRank.current;
+  const b = (comp.broadcasts || [])[0];
+  return {
+    id: ev.id, date: new Date(ev.date), tbd: comp.timeValid === false, state: st.state || "pre",
+    detail: st.shortDetail || st.detail || "", ha: comp.neutralSite ? "vs" : me.homeAway === "away" ? "@" : "vs",
+    neutral: !!comp.neutralSite, conf: !!comp.conferenceCompetition,
+    opp: { id: ot.id, name: ot.shortDisplayName || ot.displayName || ot.location || "TBD", full: ot.displayName || "",
+           logo: (ot.logos && ot.logos[0] && ot.logos[0].href) || ot.logo || "", rank: r && r <= 25 ? r : null },
+    ms, os, res,
+    week: ev.week && (ev.week.text || (ev.week.number ? "Wk " + ev.week.number : "")),
+    note: (comp.notes && comp.notes[0] && comp.notes[0].headline) || "",
+    tv: b ? ((b.media && b.media.shortName) || (b.names && b.names[0]) || "") : "",
+    venue: comp.venue ? comp.venue.fullName : ""
+  };
+}
+async function fetchSchedule(id) {
+  const cached = state.sched.get(id);
+  const live = cached && cached.games.some(g => g.state === "in");
+  if (cached && Date.now() - cached.at < (live ? 30000 : 300000)) return cached;
+  const base = TEAM_API + encodeURIComponent(id) + "/schedule" + (state.seasonYear ? "?season=" + state.seasonYear : "");
+  const ok = d => Array.isArray(d.events);
+  const reg = await getJSON(base, ok);
+  let post = null;
+  try { post = await getJSON(base + (base.includes("?") ? "&" : "?") + "seasontype=3", ok); } catch {}
+  const seen = new Set(), games = [];
+  for (const ev of [...reg.events, ...((post && post.events) || [])]) {
+    if (seen.has(ev.id)) continue; seen.add(ev.id); games.push(parseSched(ev, id));
+  }
+  games.sort((a, b) => a.date - b.date);
+  const out = { at: Date.now(), team: reg.team || {}, games };
+  state.sched.set(id, out);
+  return out;
+}
+function recOf(games, onlyConf) {
+  let w = 0, l = 0;
+  games.forEach(g => { if (g.state === "post" && (!onlyConf || g.conf)) { if (g.res === "W") w++; else if (g.res === "L") l++; } });
+  return `${w}-${l}`;
+}
+function currentRank(id) {
+  for (const g of state.games) for (const t of [g.away, g.home]) if (String(t.id) === String(id) && t.rank) return t.rank;
+  return null;
+}
+function fmtDay(g) {
+  return g.date.toLocaleDateString([], { month: "short", day: "numeric" });
+}
+function gameRow(g) {
+  const row = el("div", "gm" + (g.state === "in" ? " live" : ""));
+  const when = el("div", "when", g.week ? g.week.replace(/^Week\s*/i, "Wk ") : "");
+  when.append(el("small", null, fmtDay(g)));
+  const img = el("img"); img.alt = ""; img.loading = "lazy"; if (g.opp.logo) img.src = g.opp.logo; else img.style.visibility = "hidden";
+  const opp = el("div", "opp");
+  const nm = el("span");
+  if (g.opp.rank) nm.append(el("span", "rank", g.opp.rank));
+  nm.append(document.createTextNode(g.opp.name));
+  if (g.opp.id) tlink(nm, g.opp);
+  opp.append(nm);
+  const sub = el("small");
+  const bits = [];
+  if (g.note) bits.push(g.note);
+  if (g.state === "pre") bits.push(g.tbd ? "Time TBD" : g.date.toLocaleString([], { weekday: "short", hour: "numeric", minute: "2-digit" }));
+  if (g.state !== "post" && g.tv) bits.push(g.tv);
+  if (g.neutral && g.venue) bits.push(g.venue);
+  if (g.conf) { const c = el("span", "conf-tag", "Conf"); sub.append(c); if (bits.length) sub.append(" · "); }
+  sub.append(document.createTextNode(bits.join(" · ")));
+  opp.append(sub);
+  let res;
+  if (g.state === "post") {
+    res = el("div", "res " + (g.res || "").toLowerCase());
+    const i = el("i", null, g.res); res.append(i, document.createTextNode(`${g.ms}-${g.os}`));
+  } else if (g.state === "in") {
+    res = el("div", "res", `${g.ms}-${g.os}`);
+    sub.textContent = "Live · " + g.detail + (g.tv ? " · " + g.tv : "");
+  } else {
+    res = el("div", "res up", g.state === "pre" ? "" : g.detail);   // postponed / canceled show their status
+  }
+  row.append(when, el("div", "ha", g.ha), img, opp, res);
+  return row;
+}
+function renderTeamPanel(id, seed, data) {
+  const pinned = state.favs.has(id);
+  const pin = $("tp-pin");
+  pin.setAttribute("aria-pressed", pinned);
+  pin.textContent = pinned ? "★ Pinned" : "☆ Pin";
+  $("tp-back").hidden = state.tpStack.length < 2;
+  const team = (data && data.team) || {};
+  const logo = (team.logo) || (team.logos && team.logos[0] && team.logos[0].href) || seed.logo;
+  const img = $("tp-logo"); if (logo) { img.src = logo; img.style.visibility = ""; } else img.style.visibility = "hidden";
+  const rank = currentRank(id);
+  $("tp-name").textContent = (rank ? "#" + rank + " " : "") + (team.displayName || seed.name || "Team");
+  const sub = $("tp-sub"); sub.replaceChildren();
+  const body = $("tp-body");
+  if (!data) { body.replaceChildren(el("div", "tp-msg", seed.error || "Loading schedule…")); return; }
+  const g = data.games;
+  const overall = team.recordSummary || recOf(g, false);
+  sub.append(el("b", null, overall));
+  if (g.some(x => x.conf)) sub.append(document.createTextNode(" · " + recOf(g, true) + " conf"));
+  if (team.standingSummary) sub.append(document.createTextNode(" · " + team.standingSummary));
+  const done = g.filter(x => x.state === "post"), live = g.filter(x => x.state === "in"), left = g.filter(x => x.state === "pre");
+  const parts = [];
+  const section = (title, list, note) => {
+    if (!list.length) return;
+    const h = el("h3", null, title); if (note) h.append(el("span", null, note));
+    parts.push(h, ...list.map(gameRow));
+  };
+  section("Live now", live);
+  section("Results", done, recOf(g, false));
+  section("Remaining", left, left.length + (left.length === 1 ? " game" : " games"));
+  if (!parts.length) parts.push(el("div", "tp-msg", "No games found for this season."));
+  body.replaceChildren(...parts);
+}
+async function openTeam(id, seed, push = true) {
+  id = String(id);
+  if (push) state.tpStack.push({ id, seed });
+  const dlg = $("sheet");
+  if (!dlg.open) { try { dlg.showModal(); } catch { dlg.setAttribute("open", ""); } }
+  $("tp-body").scrollTop = 0;
+  const cached = state.sched.get(id);
+  renderTeamPanel(id, seed, cached || null);
+  try {
+    const data = await fetchSchedule(id);
+    if (state.tpStack.length && state.tpStack[state.tpStack.length - 1].id === id) renderTeamPanel(id, seed, data);
+  } catch (e) {
+    console.error(e);
+    if (!cached) renderTeamPanel(id, { ...seed, error: "Couldn't load this schedule from ESPN. Close and try again." }, null);
+  }
+}
+function closeTeam() { state.tpStack = []; const d = $("sheet"); if (d.open) { try { d.close(); } catch { d.removeAttribute("open"); } } }
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-team]");
+  if (!t) return;
+  e.preventDefault();
+  openTeam(t.dataset.team, { name: t.dataset.teamName, logo: t.dataset.teamLogo });
+});
+document.addEventListener("keydown", e => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("[data-team]")) {
+    e.preventDefault(); e.target.click();
+  }
+});
+$("tp-x").onclick = closeTeam;
+$("sheet").addEventListener("click", e => { if (e.target === $("sheet")) closeTeam(); });   // tap outside the panel
+$("sheet").addEventListener("close", () => { state.tpStack = []; });
+$("tp-back").onclick = () => {
+  state.tpStack.pop();
+  const prev = state.tpStack[state.tpStack.length - 1];
+  if (prev) openTeam(prev.id, prev.seed, false);
+};
+$("tp-pin").onclick = () => {
+  const top = state.tpStack[state.tpStack.length - 1]; if (!top) return;
+  state.favs.has(top.id) ? state.favs.delete(top.id) : state.favs.add(top.id);
+  store.set("cfb-favs", [...state.favs]);
+  renderTeamPanel(top.id, top.seed, state.sched.get(top.id) || null);
+  render();
+  if (state.standings) renderStandings();
+};
+// Keep an open panel fresh while one of its games is live.
+setInterval(() => {
+  const top = state.tpStack[state.tpStack.length - 1];
+  const d = top && state.sched.get(top.id);
+  if (d && d.games.some(g => g.state === "in")) openTeam(top.id, top.seed, false);
+}, 30000);
+
 function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 
 function teamRow(t, g) {
@@ -555,6 +806,7 @@ function teamRow(t, g) {
   if (g.state === "post") row.classList.add(t.winner ? "won" : "lost");
   const img = el("img"); img.alt = ""; img.loading = "lazy"; if (t.logo) img.src = t.logo; else img.style.visibility = "hidden";
   const nm = el("div", "name");
+  tlink(nm, t);
   if (t.rank) nm.append(el("span", "rank", t.rank));
   nm.append(document.createTextNode(t.name));
   if (t.hasBall) { const b = el("span", "ball", "●"); b.title = "Has the ball"; nm.append(b); }
@@ -700,7 +952,7 @@ function renderStandings() {
       const img = el("img"); img.alt = ""; img.loading = "lazy"; if (t.logo) img.src = t.logo; else img.style.visibility = "hidden";
       d.append(img);
       if (ranks.get(t.id)) d.append(el("span", "rank", ranks.get(t.id)));
-      const nm = el("span", "nm", t.name); nm.title = t.full; d.append(nm);
+      const nm = el("span", "nm", t.name); nm.title = t.full; tlink(nm, t); d.append(nm);
       tm.append(d);
       const sk = el("td", "stk" + (/^w/i.test(t.streak) ? " w" : /^l/i.test(t.streak) ? " l" : ""), t.streak || "–");
       tr.append(el("td", "pos", i + 1), tm, el("td", "cr", t.conf || "–"), el("td", null, t.overall || "–"),
